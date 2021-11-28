@@ -10,8 +10,8 @@ import { AuthService } from '../core/presentation/views/login/auth.service';
   providedIn: 'root'
 })
 export class PostService {
-  private urlpost2:string ='https://app-uc-sur.herokuapp.com/api/posts'; 
-  private urlpost:string = "http://localhost:9090/api/posts";
+  private urlpost:string ='https://app-uc-sur.herokuapp.com/api/posts'; 
+  private urlpost2:string = "http://localhost:9090/api/posts";
   //https://app-uc-sur.herokuapp.com/api/posts/create
   //http://localhost:9090/api/posts/all
   constructor(private http: HttpClient, private router: Router, private authService: AuthService) { }

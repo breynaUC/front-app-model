@@ -30,6 +30,6 @@ export class AppComponent {
     let username = this.authService.usuario.username;
     this.authService.logout();
     swal.fire('Logout', `Hola ${username} has cerrado sesión con exito`, 'success');
-    this.router.navigate(['/posts']);
+    this.router.navigate(['/login']);
   }
 }

@@ -7,12 +7,12 @@ import { Usuario } from 'src/app/users/model/usuario';
   providedIn: 'root'
 })
 export class AuthService {
- private _usuario:Usuario;
- private _token: string;
+ private _usuario:Usuario | null = new Usuario();
+ private _token:string |null = '';
 
   constructor(private http:HttpClient) { 
-    this._usuario = new Usuario();
-    this._token = "";
+
+
   }
   public get usuario():Usuario{
     if(this._usuario != null){
@@ -35,8 +35,8 @@ export class AuthService {
   }
 
   login(usuario: Usuario):Observable<any>{
-    const urlEndpoint = 'http://localhost:9090/oauth/token';
-    //const urlEndpoint = 'https://app-uc-sur.herokuapp.com/oauth/token';
+    //const urlEndpoint = 'http://localhost:9090/oauth/token';
+    const urlEndpoint = 'https://app-uc-sur.herokuapp.com/oauth/token';
     const credenciales = btoa('angularapp' + ':' + '1234567');
     const httpHeaders = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded',
     'Authorization': 'Basic '+ credenciales});
@@ -77,8 +77,8 @@ isAuthenticated():boolean{
 return false;
 }
 logout():void{
- // this._token=null;
- // this._usuario = null;
+  this._token= null;
+  this._usuario = null;
   sessionStorage.clear();
   sessionStorage.removeItem('token');
   sessionStorage.removeItem('usuario');
