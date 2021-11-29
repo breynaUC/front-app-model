@@ -11,7 +11,7 @@ import { AuthService } from '../core/presentation/views/login/auth.service';
 })
 export class PostService {
   private urlpost:string ='https://app-uc-sur.herokuapp.com/api/posts'; 
-  private urlpost2:string = "http://localhost:9090/api/posts";
+  //private urlpost:string = "http://localhost:9090/api/posts";
   //https://app-uc-sur.herokuapp.com/api/posts/create
   //http://localhost:9090/api/posts/all
   constructor(private http: HttpClient, private router: Router, private authService: AuthService) { }
@@ -27,7 +27,7 @@ export class PostService {
     return this.http.get<Post[]>(this.urlpost + '/all', {headers: this.agregarAuthorizationHeader()});    
   }
   create(post:Post):Observable<Post>{    
-    return this.http.post(this.urlpost + '/create', post)
+    return this.http.post(this.urlpost + '/create', post, {headers: this.agregarAuthorizationHeader()})
     .pipe(
       map((response: any)=> response.post as Post),
       catchError(e =>{

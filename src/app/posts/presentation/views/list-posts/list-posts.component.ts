@@ -13,14 +13,13 @@ export class ListPostsComponent implements OnInit {
   filas: Post[]=[];
   titulos: string[] = ["ID","Nombre","Descripcion","ACCION"];
   constructor(private postService: PostService, private router:Router) { }
-  post =new Post();
+  post:Post =new Post();
+
+
   ngOnInit(): void {
        this.postService.getPost().subscribe(data =>{
          this.filas= data;
-       });
+      });
   }
- add(){
-   this.postService.create(this.post);
-   swal.fire('Error Login', 'Usuario o clave Incorrecta', 'error');
 }
-}
+
