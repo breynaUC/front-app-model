@@ -5,7 +5,8 @@ import { FormComponent } from './presentation/views/form/form.component';
 
 const routes: Routes = [
   {path:'',component:PagePostComponent},
-  {path:'form',component:FormComponent}
+  {path:'form',component:FormComponent},
+  {path:'form/:id',component:FormComponent}
 ];
 
 @NgModule({

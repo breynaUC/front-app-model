@@ -21,5 +21,17 @@ export class ListPostsComponent implements OnInit {
          this.filas= data;
       });
   }
+
+  delete(post:Post){
+    this.postService.delete(post.id).subscribe(
+      res=>this.listar()
+    );
+  }
+
+  listar(){
+    this.postService.getPost().subscribe(data =>{
+      this.filas= data;
+   });
+  }
 }
 

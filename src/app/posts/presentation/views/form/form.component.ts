@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Post } from 'src/app/posts/post';
 import { PostService } from 'src/app/posts/post.service';
 import Swal from 'sweetalert2';
@@ -11,11 +11,12 @@ import Swal from 'sweetalert2';
 })
 export class FormComponent implements OnInit {
 
-  constructor(private postService: PostService, private router:Router) { }
+  constructor(private postService: PostService, private router:Router, private activatedRouter:ActivatedRoute) { }
   post:Post =new Post();
 
 
   ngOnInit(): void {
+    this.cargarDatos();
   }
 
   add(): void{
@@ -26,4 +27,24 @@ export class FormComponent implements OnInit {
     );
   }
 
+  cargarDatos(){
+    this.activatedRouter.params.subscribe(
+      e=>{
+        let id=e['id'];
+        if (id) {
+          this.postService.getPostId(id).subscribe(
+            es=>this.post=es
+          );
+        }
+      }
+    )
+  }
+
+  editar(){
+    console.log(this.post);
+    Swal.fire('Completado', `El post ha sido modificado con éxito`)
+    this.postService.update(this.post).subscribe(
+      res=>this.router.navigate(['/posts'])
+    );
+  }
 }

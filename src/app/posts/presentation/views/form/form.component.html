@@ -8,6 +8,11 @@
     <label for="message-text" class="col-form-label">Descripción:</label>
     <textarea [(ngModel)]="post.descripcion" class="form-control" id="descripcion" name="descripcion"></textarea>
   </div>
-  <button type="button" class="btn btn-primary" (click)="add()" >Crear</button>
+  <button type="button" class="btn btn-primary" (click)="add()" *ngIf="!post.id;else boton2">Crear</button>
+  
+  <ng-template #boton2>
+    <button type="button" class="btn btn-primary" (click)="editar()">Editar</button>
+  </ng-template>
+
 </form>
 

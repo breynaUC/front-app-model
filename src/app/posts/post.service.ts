@@ -50,7 +50,7 @@ export class PostService {
       }));
   }
   update(post:Post):Observable<any>{
-    return this.http.put<any>(`${this.urlpost}/${post.idpost}`, post).pipe(
+    return this.http.put<any>(`${this.urlpost}/update/${post.id}`, post, {headers: this.agregarAuthorizationHeader()}).pipe(
       catchError(e =>{
         if(e.status == 400){
           return throwError(e);
@@ -63,7 +63,7 @@ export class PostService {
     )
   }
   delete(id:number):Observable<Post>{
-    return this.http.delete<Post>(`${this.urlpost}/${id}`).pipe(
+    return this.http.delete<Post>(`${this.urlpost}/${id}`,{headers: this.agregarAuthorizationHeader()}).pipe(
       catchError(e =>{
         if(e.error.mensaje){
           console.error(e.error.mensaje);
